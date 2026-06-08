@@ -1,9 +1,24 @@
 class Solution {
 public:
     bool isAnagram(string s, string t) {
-        sort(begin(s), end(s));
-        sort(begin(t), end(t));
-        
-        return s == t;
+        if (s.size() != t.size())
+            return false;
+
+        vector<int> count(26, 0);
+
+        for (char ch : s) {
+            count[ch - 'a']++;
+        }
+
+        for (char ch : t) {
+            count[ch - 'a']--;
+        }
+
+        for (int num : count) {
+            if (num != 0)
+                return false;
+        }
+
+        return true;
     }
 };
